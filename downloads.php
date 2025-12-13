@@ -6,7 +6,9 @@ if (!$plugin) {
     exit("Plugin fehlt");
 }
 
-$filePath = __DIR__ . "/plugins/$plugin.jar";
+// FESTER Dateiname (dein echtes Plugin)
+$fileName = "StatsPlugin-1.0.0.jar";
+$filePath = __DIR__ . "/plugins/" . $fileName;
 $dataFile = __DIR__ . "/downloads.json";
 
 if (!file_exists($filePath)) {
@@ -16,6 +18,9 @@ if (!file_exists($filePath)) {
 
 // JSON laden
 $data = json_decode(file_get_contents($dataFile), true);
+if (!is_array($data)) {
+    $data = [];
+}
 
 // Zähler erhöhen
 if (!isset($data[$plugin])) {
@@ -28,7 +33,7 @@ file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT));
 
 // Datei ausliefern
 header("Content-Type: application/java-archive");
-header("Content-Disposition: attachment; filename=\"$plugin.jar\"");
+header("Content-Disposition: attachment; filename=\"$fileName\"");
 header("Content-Length: " . filesize($filePath));
 readfile($filePath);
 exit;
