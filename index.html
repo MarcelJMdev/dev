@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meine Minecraft Plugins</title>
+
     <style>
         * {
             margin: 0;
@@ -13,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0d1117;
             min-height: 100vh;
             padding: 20px;
         }
@@ -21,24 +22,6 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
-            padding: 40px 20px;
-        }
-
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
         }
 
         .plugins-grid {
@@ -49,16 +32,18 @@
         }
 
         .plugin-card {
-            background: white;
+            background: #161b22;
+            border: 1px solid #30363d;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .plugin-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 32px rgba(31, 111, 235, 0.4);
+            border-color: #1f6feb;
         }
 
         .plugin-header {
@@ -70,7 +55,7 @@
         .plugin-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1f6feb 0%, #0969da 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -81,17 +66,16 @@
 
         .plugin-info h2 {
             font-size: 1.5em;
-            color: #333;
-            margin-bottom: 5px;
+            color: #c9d1d9;
         }
 
         .plugin-version {
-            color: #666;
+            color: #8b949e;
             font-size: 0.9em;
         }
 
         .plugin-description {
-            color: #555;
+            color: #8b949e;
             line-height: 1.6;
             margin-bottom: 20px;
         }
@@ -104,114 +88,130 @@
         }
 
         .meta-tag {
-            background: #f0f0f0;
+            background: #21262d;
+            border: 1px solid #30363d;
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.85em;
-            color: #666;
+            color: #8b949e;
+        }
+
+        .author-tag {
+            background: #1f6feb;
+            color: white;
         }
 
         .download-btn {
             display: inline-block;
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1f6feb 0%, #0969da 100%);
             color: white;
             text-align: center;
             text-decoration: none;
             border-radius: 8px;
             font-weight: bold;
             font-size: 1.1em;
-            transition: opacity 0.3s ease;
-        }
-
-        .download-btn:hover {
-            opacity: 0.9;
+            cursor: pointer;
         }
 
         footer {
             text-align: center;
-            color: white;
-            padding: 30px;
-            opacity: 0.8;
+            color: #8b949e;
+            padding: 40px 20px;
+            border-top: 1px solid #21262d;
         }
 
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-            
-            .plugins-grid {
-                grid-template-columns: 1fr;
-            }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #58a6ff;
+            text-decoration: none;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>🎮 Meine Minecraft Plugins</h1>
-            <p>Kostenlose Spigot/Paper Plugins zum Download</p>
-        </header>
+<div class="container">
 
-        <div class="plugins-grid" id="pluginsContainer">
-            <!-- Plugins werden hier automatisch geladen -->
+    <div class="plugins-grid" id="pluginsContainer"></div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://info.farmsucht.eu" target="_blank">🌐 Website</a>
+            <a href="https://marcel.farmsucht.eu" target="_blank">👤 Marcel</a>
+            <a href="https://dsc.gg/farmsucht" target="_blank">💬 Discord</a>
         </div>
+        <p>© 2022 farmsucht</p>
+    </footer>
+</div>
 
-        <footer>
-            <p>Alle Plugins sind kostenlos und Open Source</p>
-            <p>© 2025 - Erstellt mit ❤️ für die Minecraft Community</p>
-        </footer>
-    </div>
-
-    <script>
-        // HIER DEINE PLUGINS HINZUFÜGEN
-        const plugins = [
-            {
-                name: "StatsPlugin",
-                version: "1.0.0",
-                description: "Ein umfassendes Statistik-Plugin für deinen Minecraft-Server. Tracke Spieler-Aktivitäten, Kills, Deaths und vieles mehr!",
-                minecraftVersion: "1.20+",
-                fileSize: "245 KB",
-                downloads: 0,
-                file: "StatsPlugin-1.0.0.jar",
-                icon: "📊"
-            }
-            // Weitere Plugins hier hinzufügen im gleichen Format
-        ];
-
-        // Plugins automatisch rendern
-        function renderPlugins() {
-            const container = document.getElementById('pluginsContainer');
-            
-            plugins.forEach(plugin => {
-                const card = document.createElement('div');
-                card.className = 'plugin-card';
-                
-                card.innerHTML = `
-                    <div class="plugin-header">
-                        <div class="plugin-icon">${plugin.icon}</div>
-                        <div class="plugin-info">
-                            <h2>${plugin.name}</h2>
-                            <span class="plugin-version">Version ${plugin.version}</span>
-                        </div>
-                    </div>
-                    <p class="plugin-description">${plugin.description}</p>
-                    <div class="plugin-meta">
-                        <span class="meta-tag">🎯 ${plugin.minecraftVersion}</span>
-                        <span class="meta-tag">📦 ${plugin.fileSize}</span>
-                        <span class="meta-tag">⬇️ ${plugin.downloads} Downloads</span>
-                    </div>
-                    <a href="plugins/${plugin.file}" class="download-btn" download>
-                        ⬇️ Download ${plugin.name}
-                    </a>
-                `;
-                
-                container.appendChild(card);
-            });
+<script>
+    const plugins = [
+        {
+            name: "StatsPlugin",
+            version: "1.0.0",
+            description: "Trackt Peak-Spieler, Joins, durchschnittliche Spieler und mehr",
+            minecraftVersion: "1.21.4",
+            fileSize: "10 KB",
+            author: "MarcelJM",
+            file: "StatsPlugin-1.0.0.jar",
+            icon: "📊",
+            downloads: 0
         }
+    ];
 
-        renderPlugins();
-    </script>
+    function renderPlugins() {
+        const container = document.getElementById("pluginsContainer");
+        container.innerHTML = "";
+
+        plugins.forEach((plugin, index) => {
+            const card = document.createElement("div");
+            card.className = "plugin-card";
+
+            card.innerHTML = `
+                <div class="plugin-header">
+                    <div class="plugin-icon">${plugin.icon}</div>
+                    <div class="plugin-info">
+                        <h2>${plugin.name}</h2>
+                        <span class="plugin-version">Version ${plugin.version}</span>
+                    </div>
+                </div>
+
+                <p class="plugin-description">${plugin.description}</p>
+
+                <div class="plugin-meta">
+                    <span class="meta-tag author-tag">👤 ${plugin.author}</span>
+                    <span class="meta-tag">🎯 ${plugin.minecraftVersion}</span>
+                    <span class="meta-tag">📦 ${plugin.fileSize}</span>
+                    <span class="meta-tag" id="downloads-${index}">
+                        ⬇️ ${plugin.downloads} Downloads
+                    </span>
+                </div>
+
+                <a class="download-btn" onclick="downloadPlugin(${index})" href="plugins/${plugin.file}" download>
+                    ⬇️ Download ${plugin.name}
+                </a>
+            `;
+
+            container.appendChild(card);
+        });
+    }
+
+    function downloadPlugin(index) {
+        plugins[index].downloads++;
+        document.getElementById(`downloads-${index}`).innerText =
+            `⬇️ ${plugins[index].downloads} Downloads`;
+    }
+
+    renderPlugins();
+</script>
+
 </body>
 </html>
