@@ -37,13 +37,6 @@
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .plugin-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 32px rgba(31, 111, 235, 0.4);
-            border-color: #1f6feb;
         }
 
         .plugin-header {
@@ -76,8 +69,8 @@
 
         .plugin-description {
             color: #8b949e;
-            line-height: 1.6;
             margin-bottom: 20px;
+            line-height: 1.6;
         }
 
         .plugin-meta {
@@ -102,7 +95,7 @@
         }
 
         .download-btn {
-            display: inline-block;
+            display: block;
             width: 100%;
             padding: 15px;
             background: linear-gradient(135deg, #1f6feb 0%, #0969da 100%);
@@ -112,7 +105,6 @@
             border-radius: 8px;
             font-weight: bold;
             font-size: 1.1em;
-            cursor: pointer;
         }
 
         footer {
@@ -153,64 +145,53 @@
 </div>
 
 <script>
-    const plugins = [
-        {
-            name: "StatsPlugin",
-            version: "1.0.0",
-            description: "Trackt Peak-Spieler, Joins, durchschnittliche Spieler und mehr",
-            minecraftVersion: "1.21.4",
-            fileSize: "10 KB",
-            author: "MarcelJM",
-            file: "StatsPlugin-1.0.0.jar",
-            icon: "📊",
-            downloads: 0
-        }
-    ];
+const plugin = {
+    key: "StatsPlugin",
+    name: "StatsPlugin",
+    version: "1.0.0",
+    description: "Trackt Peak-Spieler, Joins, durchschnittliche Spieler und mehr",
+    minecraftVersion: "1.21.4",
+    fileSize: "10 KB",
+    author: "MarcelJM",
+    icon: "📊"
+};
 
-    function renderPlugins() {
-        const container = document.getElementById("pluginsContainer");
-        container.innerHTML = "";
+async function renderPlugin() {
+    const container = document.getElementById("pluginsContainer");
 
-        plugins.forEach((plugin, index) => {
-            const card = document.createElement("div");
-            card.className = "plugin-card";
+    // globale Downloads laden
+    const response = await fetch("downloads.json");
+    const downloads = await response.json();
+    const count = downloads[plugin.key] ?? 0;
 
-            card.innerHTML = `
-                <div class="plugin-header">
-                    <div class="plugin-icon">${plugin.icon}</div>
-                    <div class="plugin-info">
-                        <h2>${plugin.name}</h2>
-                        <span class="plugin-version">Version ${plugin.version}</span>
-                    </div>
+    container.innerHTML = `
+        <div class="plugin-card">
+            <div class="plugin-header">
+                <div class="plugin-icon">${plugin.icon}</div>
+                <div class="plugin-info">
+                    <h2>${plugin.name}</h2>
+                    <span class="plugin-version">Version ${plugin.version}</span>
                 </div>
+            </div>
 
-                <p class="plugin-description">${plugin.description}</p>
+            <p class="plugin-description">${plugin.description}</p>
 
-                <div class="plugin-meta">
-                    <span class="meta-tag author-tag">👤 ${plugin.author}</span>
-                    <span class="meta-tag">🎯 ${plugin.minecraftVersion}</span>
-                    <span class="meta-tag">📦 ${plugin.fileSize}</span>
-                    <span class="meta-tag" id="downloads-${index}">
-                        ⬇️ ${plugin.downloads} Downloads
-                    </span>
-                </div>
+            <div class="plugin-meta">
+                <span class="meta-tag author-tag">👤 ${plugin.author}</span>
+                <span class="meta-tag">🎯 ${plugin.minecraftVersion}</span>
+                <span class="meta-tag">📦 ${plugin.fileSize}</span>
+                <span class="meta-tag">⬇️ ${count} Downloads</span>
+            </div>
 
-                <a class="download-btn" onclick="downloadPlugin(${index})" href="plugins/${plugin.file}" download>
-                    ⬇️ Download ${plugin.name}
-                </a>
-            `;
+            <a class="download-btn"
+               href="download.php?plugin=${plugin.key}">
+               ⬇️ Download ${plugin.name}
+            </a>
+        </div>
+    `;
+}
 
-            container.appendChild(card);
-        });
-    }
-
-    function downloadPlugin(index) {
-        plugins[index].downloads++;
-        document.getElementById(`downloads-${index}`).innerText =
-            `⬇️ ${plugins[index].downloads} Downloads`;
-    }
-
-    renderPlugins();
+renderPlugin();
 </script>
 
 </body>
