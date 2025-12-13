@@ -144,52 +144,84 @@
     </footer>
 </div>
 
-<script>
-const plugin = {
-    key: "StatsPlugin",
-    name: "StatsPlugin",
-    version: "1.0.0",
-    description: "Trackt Peak-Spieler, Joins, durchschnittliche Spieler und mehr",
-    minecraftVersion: "1.21.4",
-    fileSize: "10 KB",
-    author: "MarcelJM",
-    icon: "📊"
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  increment
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* 🔥 Firebase Verbindung */
+const firebaseConfig = {
+  apiKey: "AIzaSyAiiuhv3tcH7tXlcH_vT_ROS6c-wxy3RfQ",
+  authDomain: "farmsucht-downloads.firebaseapp.com",
+  projectId: "farmsucht-downloads",
+  storageBucket: "farmsucht-downloads.appspot.com",
+  messagingSenderId: "438965645566",
+  appId: "1:438965645566:web:525e31e43abbd0197235af"
 };
 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* 🔧 Plugin Daten */
+const pluginKey = "StatsPlugin";
+const container = document.getElementById("pluginsContainer");
+
+/* 📊 Plugin anzeigen */
 async function renderPlugin() {
-    const container = document.getElementById("pluginsContainer");
+  const ref = doc(db, "downloads", pluginKey);
+  const snap = await getDoc(ref);
 
-    // globale Downloads laden
-    const response = await fetch("downloads.json");
-    const downloads = await response.json();
-    const count = downloads[plugin.key] ?? 0;
+  let count = 0;
+  if (snap.exists()) {
+    count = snap.data().count;
+  } else {
+    await setDoc(ref, { count: 0 });
+  }
 
-    container.innerHTML = `
-        <div class="plugin-card">
-            <div class="plugin-header">
-                <div class="plugin-icon">${plugin.icon}</div>
-                <div class="plugin-info">
-                    <h2>${plugin.name}</h2>
-                    <span class="plugin-version">Version ${plugin.version}</span>
-                </div>
-            </div>
-
-            <p class="plugin-description">${plugin.description}</p>
-
-            <div class="plugin-meta">
-                <span class="meta-tag author-tag">👤 ${plugin.author}</span>
-                <span class="meta-tag">🎯 ${plugin.minecraftVersion}</span>
-                <span class="meta-tag">📦 ${plugin.fileSize}</span>
-                <span class="meta-tag">⬇️ ${count} Downloads</span>
-            </div>
-
-            <a class="download-btn"
-               href="download.php?plugin=${plugin.key}">
-               ⬇️ Download ${plugin.name}
-            </a>
+  container.innerHTML = `
+    <div class="plugin-card">
+      <div class="plugin-header">
+        <div class="plugin-icon">📊</div>
+        <div class="plugin-info">
+          <h2>StatsPlugin</h2>
+          <span class="plugin-version">Version 1.0.0</span>
         </div>
-    `;
+      </div>
+
+      <p class="plugin-description">
+        Trackt Peak-Spieler, Joins, durchschnittliche Spieler und mehr
+      </p>
+
+      <div class="plugin-meta">
+        <span class="meta-tag author-tag">👤 MarcelJM</span>
+        <span class="meta-tag">🎯 1.21.4</span>
+        <span class="meta-tag">📦 10 KB</span>
+        <span class="meta-tag">⬇️ ${count} Downloads</span>
+      </div>
+
+      <a class="download-btn"
+         href="plugins/StatsPlugin-1.0.0.jar"
+         onclick="countDownload()"
+         download>
+         ⬇️ Download StatsPlugin
+      </a>
+    </div>
+  `;
 }
+
+/* ⬇️ Download zählen */
+window.countDownload = async function () {
+  const ref = doc(db, "downloads", pluginKey);
+  await updateDoc(ref, {
+    count: increment(1)
+  });
+};
 
 renderPlugin();
 </script>
