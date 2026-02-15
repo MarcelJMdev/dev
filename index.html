@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Minecraft Plugins</title>
+    <title>FARMSUCHT - Downloads</title>
 
     <style>
         * {
@@ -14,117 +14,268 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0d1117;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        .plugins-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #1f6feb 0%, #0969da 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(31, 111, 235, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            color: white;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #c9d1d9;
+            margin: 60px 0 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #8b949e;
+            font-size: 1.2em;
             margin-bottom: 40px;
         }
 
-        .plugin-card {
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
             background: #161b22;
             border: 1px solid #30363d;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .plugin-header {
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #1f6feb, #0969da);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(31, 111, 235, 0.4);
+            border-color: #1f6feb;
+        }
+
+        .product-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        .plugin-icon {
-            width: 60px;
-            height: 60px;
+        .product-icon {
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #1f6feb 0%, #0969da 100%);
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2em;
-            margin-right: 15px;
+            font-size: 2.5em;
+            margin-right: 20px;
+            box-shadow: 0 8px 20px rgba(31, 111, 235, 0.4);
         }
 
-        .plugin-info h2 {
-            font-size: 1.5em;
+        .product-info h2 {
+            font-size: 1.8em;
             color: #c9d1d9;
+            margin-bottom: 5px;
         }
 
-        .plugin-version {
+        .product-version {
             color: #8b949e;
-            font-size: 0.9em;
+            font-size: 1em;
         }
 
-        .plugin-description {
+        .product-description {
             color: #8b949e;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            font-size: 1.05em;
         }
 
-        .plugin-meta {
+        .features-list {
+            background: #0d1117;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .features-list h4 {
+            color: #58a6ff;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .features-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            color: #8b949e;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 0.95em;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #3fb950;
+            font-weight: bold;
+        }
+
+        .product-meta {
             display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
         }
 
         .meta-tag {
             background: #21262d;
             border: 1px solid #30363d;
-            padding: 5px 12px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.85em;
+            font-size: 0.9em;
             color: #8b949e;
+            font-weight: 500;
         }
 
         .author-tag {
             background: #1f6feb;
             color: white;
+            border-color: #1f6feb;
+        }
+
+        .new-tag {
+            background: #3fb950;
+            color: white;
+            border-color: #3fb950;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .download-btn {
             display: block;
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             background: linear-gradient(135deg, #1f6feb 0%, #0969da 100%);
             color: white;
             text-align: center;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: bold;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(31, 111, 235, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(31, 111, 235, 0.6);
+        }
+
+        .coming-soon {
+            background: linear-gradient(135deg, #6e40c9 0%, #bc4749 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .coming-soon h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .coming-soon p {
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1.1em;
         }
 
         footer {
             text-align: center;
             color: #8b949e;
-            padding: 40px 20px;
+            padding: 60px 20px;
             border-top: 1px solid #21262d;
+            margin-top: 80px;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 30px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
         }
 
         .footer-links a {
             color: #58a6ff;
             text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #1f6feb;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -132,7 +283,154 @@
 <body>
 <div class="container">
 
-    <div class="plugins-grid" id="pluginsContainer"></div>
+    <div class="hero">
+        <h1>🚀 FARMSUCHT Downloads</h1>
+        <p>Professionelle Software & Plugins von MarcelJM - Kostenlos für alle!</p>
+    </div>
+
+    <h2 class="section-title">💻 Software</h2>
+    <p class="section-subtitle">Leistungsstarke Desktop-Anwendungen</p>
+
+    <div class="products-grid">
+        <!-- FARMSUCHT Browser -->
+        <div class="product-card">
+            <div class="product-header">
+                <div class="product-icon">🌐</div>
+                <div class="product-info">
+                    <h2>FARMSUCHT Browser</h2>
+                    <span class="product-version">Version 2.0.0 Ultimate</span>
+                </div>
+            </div>
+
+            <p class="product-description">
+                Der ultimative Browser mit Gaming-Features, Privacy-Tools, Social Media Hub und Download Manager. 
+                Perfekt für Power-User die maximale Kontrolle wollen!
+            </p>
+
+            <div class="features-list">
+                <h4>🎮 Gaming Features</h4>
+                <ul>
+                    <li>Auto-Clicker (einstellbare CPS)</li>
+                    <li>Macro Recorder & Player</li>
+                    <li>FPS Counter & Latency Display</li>
+                    <li>Low Latency Gaming Mode</li>
+                </ul>
+            </div>
+
+            <div class="features-list">
+                <h4>🔒 Privacy & Security</h4>
+                <ul>
+                    <li>VPN & Proxy Integration</li>
+                    <li>Cookie Manager & Auto-Delete</li>
+                    <li>Script Blocker & AdBlocker</li>
+                    <li>Do Not Track</li>
+                </ul>
+            </div>
+
+            <div class="features-list">
+                <h4>📱 Social Media Hub</h4>
+                <ul>
+                    <li>Discord, Twitter, Instagram, TikTok</li>
+                    <li>Alle in einem Sidebar</li>
+                    <li>Schneller Zugriff ohne Tab-Switch</li>
+                </ul>
+            </div>
+
+            <div class="features-list">
+                <h4>📥 Download Manager</h4>
+                <ul>
+                    <li>Pause & Resume Downloads</li>
+                    <li>Speed Display & Progress</li>
+                    <li>Download History</li>
+                </ul>
+            </div>
+
+            <div class="features-list">
+                <h4>🎨 Customization</h4>
+                <ul>
+                    <li>6 Themes (Dark, Light, Blue, Red, Green, Purple)</li>
+                    <li>Custom CSS Injection</li>
+                    <li>Font Size Control</li>
+                    <li>Keyboard Shortcuts</li>
+                </ul>
+            </div>
+
+            <div class="features-list">
+                <h4>⏰ Weitere Features</h4>
+                <ul>
+                    <li>Live Uhr & Datum (anpassbar)</li>
+                    <li>Tab-Management & Session Restore</li>
+                    <li>Bookmarks & History</li>
+                    <li>Multi-Tab Browsing</li>
+                </ul>
+            </div>
+
+            <div class="product-meta">
+                <span class="meta-tag author-tag">👤 MarcelJM</span>
+                <span class="meta-tag new-tag">🆕 NEU!</span>
+                <span class="meta-tag">💻 Windows 10/11</span>
+                <span class="meta-tag">📦 ~79 MB</span>
+                <span class="meta-tag" id="browser-downloads">⬇️ 0 Downloads</span>
+            </div>
+
+            <a class="download-btn"
+               href="software/FARMSUCHT Browser Setup 2.0.0.exe"
+               onclick="countDownload('FARMSUCHTBrowser')"
+               download>
+               ⬇️ Download Browser (2.0.0)
+            </a>
+        </div>
+    </div>
+
+    <div class="coming-soon">
+        <h3>🔜 Noch mehr Features kommen bald!</h3>
+        <p>Password Manager • Screen Recorder • AI Assistant • Extensions Store • und vieles mehr...</p>
+    </div>
+
+    <h2 class="section-title">🎮 Minecraft Plugins</h2>
+    <p class="section-subtitle">Professionelle Server-Plugins</p>
+
+    <div class="products-grid">
+        <!-- Stats Plugin -->
+        <div class="product-card">
+            <div class="product-header">
+                <div class="product-icon">📊</div>
+                <div class="product-info">
+                    <h2>StatsPlugin</h2>
+                    <span class="product-version">Version 1.0.0</span>
+                </div>
+            </div>
+
+            <p class="product-description">
+                Trackt Peak-Spieler, Joins, durchschnittliche Spieler und mehr. 
+                Perfekt für Server-Statistiken und Monitoring!
+            </p>
+
+            <div class="features-list">
+                <h4>Features</h4>
+                <ul>
+                    <li>Peak Player Tracking</li>
+                    <li>Join Counter & Statistics</li>
+                    <li>Average Player Count</li>
+                    <li>Leichtgewichtig & Performant</li>
+                </ul>
+            </div>
+
+            <div class="product-meta">
+                <span class="meta-tag author-tag">👤 MarcelJM</span>
+                <span class="meta-tag">🎯 1.21.4</span>
+                <span class="meta-tag">📦 10 KB</span>
+                <span class="meta-tag" id="stats-downloads">⬇️ 0 Downloads</span>
+            </div>
+
+            <a class="download-btn"
+               href="plugins/StatsPlugin-1.0.0.jar"
+               onclick="countDownload('StatsPlugin')"
+               download>
+               ⬇️ Download Plugin (1.0.0)
+            </a>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-links">
@@ -140,7 +438,7 @@
             <a href="https://marcel.farmsucht.eu" target="_blank">👤 Marcel</a>
             <a href="https://dsc.gg/farmsucht" target="_blank">💬 Discord</a>
         </div>
-        <p>© 2022 farmsucht</p>
+        <p>© 2022-2026 FARMSUCHT • Developed by MarcelJM</p>
     </footer>
 </div>
 
@@ -155,7 +453,6 @@ import {
   increment
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔥 Firebase Verbindung */
 const firebaseConfig = {
   apiKey: "AIzaSyAiiuhv3tcH7tXlcH_vT_ROS6c-wxy3RfQ",
   authDomain: "farmsucht-downloads.firebaseapp.com",
@@ -168,62 +465,41 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* 🔧 Plugin Daten */
-const pluginKey = "StatsPlugin";
-const container = document.getElementById("pluginsContainer");
-
-/* 📊 Plugin anzeigen */
-async function renderPlugin() {
-  const ref = doc(db, "downloads", pluginKey);
-  const snap = await getDoc(ref);
-
-  let count = 0;
-  if (snap.exists()) {
-    count = snap.data().count;
-  } else {
-    await setDoc(ref, { count: 0 });
-  }
-
-  container.innerHTML = `
-    <div class="plugin-card">
-      <div class="plugin-header">
-        <div class="plugin-icon">📊</div>
-        <div class="plugin-info">
-          <h2>StatsPlugin</h2>
-          <span class="plugin-version">Version 1.0.0</span>
-        </div>
-      </div>
-
-      <p class="plugin-description">
-        Trackt Peak-Spieler, Joins, durchschnittliche Spieler und mehr
-      </p>
-
-      <div class="plugin-meta">
-        <span class="meta-tag author-tag">👤 MarcelJM</span>
-        <span class="meta-tag">🎯 1.21.4</span>
-        <span class="meta-tag">📦 10 KB</span>
-        <span class="meta-tag">⬇️ ${count} Downloads</span>
-      </div>
-
-      <a class="download-btn"
-         href="plugins/StatsPlugin-1.0.0.jar"
-         onclick="countDownload()"
-         download>
-         ⬇️ Download StatsPlugin
-      </a>
-    </div>
-  `;
+// Load download counts
+async function loadDownloadCounts() {
+    const products = ['StatsPlugin', 'FARMSUCHTBrowser'];
+    
+    for (const productKey of products) {
+        const ref = doc(db, "downloads", productKey);
+        const snap = await getDoc(ref);
+        
+        let count = 0;
+        if (snap.exists()) {
+            count = snap.data().count;
+        } else {
+            await setDoc(ref, { count: 0 });
+        }
+        
+        const elementId = productKey === 'StatsPlugin' ? 'stats-downloads' : 'browser-downloads';
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.textContent = `⬇️ ${count} Downloads`;
+        }
+    }
 }
 
-/* ⬇️ Download zählen */
-window.countDownload = async function () {
-  const ref = doc(db, "downloads", pluginKey);
-  await updateDoc(ref, {
-    count: increment(1)
-  });
+// Count download
+window.countDownload = async function(productKey) {
+    const ref = doc(db, "downloads", productKey);
+    await updateDoc(ref, {
+        count: increment(1)
+    });
+    
+    // Update display
+    setTimeout(() => loadDownloadCounts(), 500);
 };
 
-renderPlugin();
+loadDownloadCounts();
 </script>
 
 </body>
